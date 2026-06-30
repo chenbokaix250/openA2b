@@ -24,6 +24,7 @@ set(TEST_SOURCES
     src/test_a2b_remote.c
     src/test_mock_ad2428.c
     src/test_a2b_audio.c
+    src/test_a2b_slot.c
 )
 
 add_executable(${PROJECT_NAME}_tests ${TEST_SOURCES})

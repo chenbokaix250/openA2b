@@ -10,6 +10,7 @@
 #include "a2b_irq.h"
 #include "a2b_remote.h"
 #include "a2b_audio.h"
+#include "a2b_slot.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
@@ -124,6 +125,12 @@ extern void test_A2B_AudioMgrSetRoute(void);
 extern void test_A2B_AudioMgrEnableRoute(void);
 extern void test_A2B_AudioMgrDisableRoute(void);
 extern void test_A2B_AudioMgrSetRoute_multiple_routes(void);
+
+/* Slot */
+extern void test_A2B_SlotMgrInit(void);
+extern void test_A2B_SlotMgrSetSlot(void);
+extern void test_A2B_SlotMgrGetSlot(void);
+extern void test_A2B_SlotMgrSetSlot_out_of_range(void);
 
 int main(void)
 {
@@ -242,6 +249,12 @@ int main(void)
     RUN_TEST(test_A2B_AudioMgrEnableRoute);
     RUN_TEST(test_A2B_AudioMgrDisableRoute);
     RUN_TEST(test_A2B_AudioMgrSetRoute_multiple_routes);
+
+    /* Slot */
+    RUN_TEST(test_A2B_SlotMgrInit);
+    RUN_TEST(test_A2B_SlotMgrSetSlot);
+    RUN_TEST(test_A2B_SlotMgrGetSlot);
+    RUN_TEST(test_A2B_SlotMgrSetSlot_out_of_range);
 
     return UNITY_END();
 }
