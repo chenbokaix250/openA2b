@@ -4,6 +4,7 @@
 #include "ad2428_reg.h"
 #include "a2b_device.h"
 #include "a2b_state.h"
+#include "a2b_network.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
@@ -65,6 +66,14 @@ extern void test_A2B_StateMachineTransition_fires_callback(void);
 extern void test_A2B_StateMachineTransition_invalid_returns_error(void);
 extern void test_A2B_StateMachineIsValidTransition(void);
 extern void test_A2B_StateMachineTransition_full_sequence(void);
+extern void test_A2B_NetworkMgrInit(void);
+extern void test_A2B_NetworkMgrAddNode(void);
+extern void test_A2B_NetworkMgrAddNode_assigns_id(void);
+extern void test_A2B_NetworkMgrFindNodeById(void);
+extern void test_A2B_NetworkMgrFindNodeById_not_found(void);
+extern void test_A2B_NetworkMgrFindNodeByAddr(void);
+extern void test_A2B_NetworkMgrRemoveNode(void);
+extern void test_A2B_NetworkMgrClear(void);
 
 int main(void)
 {
@@ -132,6 +141,16 @@ int main(void)
     RUN_TEST(test_A2B_StateMachineTransition_invalid_returns_error);
     RUN_TEST(test_A2B_StateMachineIsValidTransition);
     RUN_TEST(test_A2B_StateMachineTransition_full_sequence);
+
+    /* Network Manager */
+    RUN_TEST(test_A2B_NetworkMgrInit);
+    RUN_TEST(test_A2B_NetworkMgrAddNode);
+    RUN_TEST(test_A2B_NetworkMgrAddNode_assigns_id);
+    RUN_TEST(test_A2B_NetworkMgrFindNodeById);
+    RUN_TEST(test_A2B_NetworkMgrFindNodeById_not_found);
+    RUN_TEST(test_A2B_NetworkMgrFindNodeByAddr);
+    RUN_TEST(test_A2B_NetworkMgrRemoveNode);
+    RUN_TEST(test_A2B_NetworkMgrClear);
 
     return UNITY_END();
 }

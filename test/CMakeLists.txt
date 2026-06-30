@@ -18,6 +18,7 @@ set(TEST_SOURCES
     src/test_ad2428_reg.c
     src/test_a2b_device.c
     src/test_a2b_state.c
+    src/test_a2b_network.c
 )
 
 add_executable(${PROJECT_NAME}_tests ${TEST_SOURCES})
