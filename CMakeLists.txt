@@ -23,6 +23,7 @@ add_library(${PROJECT_NAME}_hal STATIC
     core/a2b_discovery.c
     core/a2b_irq.c
     core/a2b_remote.c
+    core/a2b_audio.c
 )
 target_include_directories(${PROJECT_NAME}_hal PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include

@@ -9,6 +9,7 @@
 #include "a2b_discovery.h"
 #include "a2b_irq.h"
 #include "a2b_remote.h"
+#include "a2b_audio.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
@@ -116,6 +117,13 @@ extern void test_MockAD2428_SetReg_and_GetReg(void);
 extern void test_MockAD2428_I2CWrite(void);
 extern void test_MockAD2428_I2CRead(void);
 extern void test_MockAD2428_InjectNack(void);
+
+/* Audio */
+extern void test_A2B_AudioMgrInit(void);
+extern void test_A2B_AudioMgrSetRoute(void);
+extern void test_A2B_AudioMgrEnableRoute(void);
+extern void test_A2B_AudioMgrDisableRoute(void);
+extern void test_A2B_AudioMgrSetRoute_multiple_routes(void);
 
 int main(void)
 {
@@ -227,6 +235,13 @@ int main(void)
     RUN_TEST(test_MockAD2428_I2CWrite);
     RUN_TEST(test_MockAD2428_I2CRead);
     RUN_TEST(test_MockAD2428_InjectNack);
+
+    /* Audio */
+    RUN_TEST(test_A2B_AudioMgrInit);
+    RUN_TEST(test_A2B_AudioMgrSetRoute);
+    RUN_TEST(test_A2B_AudioMgrEnableRoute);
+    RUN_TEST(test_A2B_AudioMgrDisableRoute);
+    RUN_TEST(test_A2B_AudioMgrSetRoute_multiple_routes);
 
     return UNITY_END();
 }
