@@ -6,6 +6,8 @@
 #include "a2b_state.h"
 #include "a2b_network.h"
 #include "a2b_discovery.h"
+#include "a2b_irq.h"
+#include "a2b_remote.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
@@ -89,6 +91,22 @@ extern void test_A2B_DiscoveryComplete(void);
 extern void test_A2B_DiscoveryAbort(void);
 extern void test_A2B_DiscoveryStart_when_already_in_progress(void);
 extern void test_A2B_DiscoveryStep_when_not_started(void);
+
+/* IRQ */
+extern void test_A2B_IrqMgrInit(void);
+extern void test_A2B_IrqMgrEnable(void);
+extern void test_A2B_IrqMgrDisable(void);
+extern void test_A2B_IrqMgrRegisterCallback(void);
+extern void test_A2B_IrqMgrTriggerEvent_calls_callback(void);
+extern void test_A2B_IrqMgrTriggerEvent_no_callback_when_disabled(void);
+
+/* Remote Register */
+extern void test_A2B_RemoteRegInit(void);
+extern void test_A2B_RemoteRegInit_with_null_context(void);
+extern void test_A2B_RemoteRegInit_with_null_device(void);
+extern void test_A2B_RemoteRegRead_returns_unsupported(void);
+extern void test_A2B_RemoteRegWrite_returns_unsupported(void);
+extern void test_A2B_RemoteRegUpdateBits_returns_unsupported(void);
 
 int main(void)
 {
@@ -176,6 +194,22 @@ int main(void)
     RUN_TEST(test_A2B_DiscoveryAbort);
     RUN_TEST(test_A2B_DiscoveryStart_when_already_in_progress);
     RUN_TEST(test_A2B_DiscoveryStep_when_not_started);
+
+    /* IRQ */
+    RUN_TEST(test_A2B_IrqMgrInit);
+    RUN_TEST(test_A2B_IrqMgrEnable);
+    RUN_TEST(test_A2B_IrqMgrDisable);
+    RUN_TEST(test_A2B_IrqMgrRegisterCallback);
+    RUN_TEST(test_A2B_IrqMgrTriggerEvent_calls_callback);
+    RUN_TEST(test_A2B_IrqMgrTriggerEvent_no_callback_when_disabled);
+
+    /* Remote Register */
+    RUN_TEST(test_A2B_RemoteRegInit);
+    RUN_TEST(test_A2B_RemoteRegInit_with_null_context);
+    RUN_TEST(test_A2B_RemoteRegInit_with_null_device);
+    RUN_TEST(test_A2B_RemoteRegRead_returns_unsupported);
+    RUN_TEST(test_A2B_RemoteRegWrite_returns_unsupported);
+    RUN_TEST(test_A2B_RemoteRegUpdateBits_returns_unsupported);
 
     return UNITY_END();
 }

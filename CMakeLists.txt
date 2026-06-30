@@ -21,11 +21,14 @@ add_library(${PROJECT_NAME}_hal STATIC
     core/a2b_state.c
     core/a2b_network.c
     core/a2b_discovery.c
+    core/a2b_irq.c
+    core/a2b_remote.c
 )
 target_include_directories(${PROJECT_NAME}_hal PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/hal
     ${CMAKE_CURRENT_SOURCE_DIR}/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/register
 )
 
 # Register library

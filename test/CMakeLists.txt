@@ -20,6 +20,8 @@ set(TEST_SOURCES
     src/test_a2b_state.c
     src/test_a2b_network.c
     src/test_a2b_discovery.c
+    src/test_a2b_irq.c
+    src/test_a2b_remote.c
 )
 
 add_executable(${PROJECT_NAME}_tests ${TEST_SOURCES})
