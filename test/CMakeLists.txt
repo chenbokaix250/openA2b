@@ -12,6 +12,7 @@ set(TEST_SOURCES
     src/test_a2b_error.c
     src/test_a2b_i2c.c
     src/test_mock_i2c.c
+    src/test_a2b_timer.c
 )
 
 add_executable(${PROJECT_NAME}_tests ${TEST_SOURCES})

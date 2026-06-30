@@ -29,6 +29,10 @@ extern void test_MockI2C_Init_succeeds(void);
 extern void test_MockI2C_InjectNackOnWrite(void);
 extern void test_MockI2C_InjectNackOnRead(void);
 extern void test_MockI2C_GetResponse_returns_valid_addr(void);
+extern void test_A2B_TimerInit_returns_non_null(void);
+extern void test_A2B_TimerDeinit_returns_success(void);
+extern void test_A2B_TimerStop_returns_success(void);
+extern void test_A2B_TimerIsRunning_returns_false_after_init(void);
 
 int main(void)
 {
@@ -59,6 +63,12 @@ int main(void)
     RUN_TEST(test_MockI2C_InjectNackOnWrite);
     RUN_TEST(test_MockI2C_InjectNackOnRead);
     RUN_TEST(test_MockI2C_GetResponse_returns_valid_addr);
+
+    /* Timer */
+    RUN_TEST(test_A2B_TimerInit_returns_non_null);
+    RUN_TEST(test_A2B_TimerDeinit_returns_success);
+    RUN_TEST(test_A2B_TimerStop_returns_success);
+    RUN_TEST(test_A2B_TimerIsRunning_returns_false_after_init);
 
     return UNITY_END();
 }
