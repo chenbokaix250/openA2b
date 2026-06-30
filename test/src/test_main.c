@@ -5,19 +5,26 @@
 #include "a2b_device.h"
 #include "a2b_state.h"
 #include "a2b_network.h"
+#include "a2b_discovery.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
+
+/* Discovery test initialization/cleanup */
+extern void A2B_DiscoveryTestInit(void);
+extern void A2B_DiscoveryTestDeinit(void);
 
 void setUp(void)
 {
     MockI2C_Init();
     A2B_LoggerInit();
     AD2428_RegTestReset();
+    A2B_DiscoveryTestInit();
 }
 
 void tearDown(void)
 {
+    A2B_DiscoveryTestDeinit();
     MockI2C_Reset();
 }
 
@@ -74,6 +81,14 @@ extern void test_A2B_NetworkMgrFindNodeById_not_found(void);
 extern void test_A2B_NetworkMgrFindNodeByAddr(void);
 extern void test_A2B_NetworkMgrRemoveNode(void);
 extern void test_A2B_NetworkMgrClear(void);
+extern void test_A2B_DiscoveryMgrInit(void);
+extern void test_A2B_DiscoveryStart(void);
+extern void test_A2B_DiscoveryStep(void);
+extern void test_A2B_DiscoveryStep_multiple_nodes(void);
+extern void test_A2B_DiscoveryComplete(void);
+extern void test_A2B_DiscoveryAbort(void);
+extern void test_A2B_DiscoveryStart_when_already_in_progress(void);
+extern void test_A2B_DiscoveryStep_when_not_started(void);
 
 int main(void)
 {
@@ -151,6 +166,16 @@ int main(void)
     RUN_TEST(test_A2B_NetworkMgrFindNodeByAddr);
     RUN_TEST(test_A2B_NetworkMgrRemoveNode);
     RUN_TEST(test_A2B_NetworkMgrClear);
+
+    /* Discovery */
+    RUN_TEST(test_A2B_DiscoveryMgrInit);
+    RUN_TEST(test_A2B_DiscoveryStart);
+    RUN_TEST(test_A2B_DiscoveryStep);
+    RUN_TEST(test_A2B_DiscoveryStep_multiple_nodes);
+    RUN_TEST(test_A2B_DiscoveryComplete);
+    RUN_TEST(test_A2B_DiscoveryAbort);
+    RUN_TEST(test_A2B_DiscoveryStart_when_already_in_progress);
+    RUN_TEST(test_A2B_DiscoveryStep_when_not_started);
 
     return UNITY_END();
 }
