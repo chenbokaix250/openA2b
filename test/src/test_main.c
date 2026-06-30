@@ -3,6 +3,7 @@
 #include "a2b_logger.h"
 #include "ad2428_reg.h"
 #include "a2b_device.h"
+#include "a2b_state.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
@@ -57,6 +58,13 @@ extern void test_A2B_DeviceDeinit(void);
 extern void test_A2B_DeviceGetState(void);
 extern void test_A2B_DeviceSetState(void);
 extern void test_A2B_DeviceInit_sets_max_nodes_limit(void);
+extern void test_A2B_StateMachineInit_sets_init_state(void);
+extern void test_A2B_StateMachineInit_with_callback(void);
+extern void test_A2B_StateMachineTransition_INIT_to_IDLE(void);
+extern void test_A2B_StateMachineTransition_fires_callback(void);
+extern void test_A2B_StateMachineTransition_invalid_returns_error(void);
+extern void test_A2B_StateMachineIsValidTransition(void);
+extern void test_A2B_StateMachineTransition_full_sequence(void);
 
 int main(void)
 {
@@ -115,6 +123,15 @@ int main(void)
     RUN_TEST(test_A2B_DeviceGetState);
     RUN_TEST(test_A2B_DeviceSetState);
     RUN_TEST(test_A2B_DeviceInit_sets_max_nodes_limit);
+
+    /* State Machine */
+    RUN_TEST(test_A2B_StateMachineInit_sets_init_state);
+    RUN_TEST(test_A2B_StateMachineInit_with_callback);
+    RUN_TEST(test_A2B_StateMachineTransition_INIT_to_IDLE);
+    RUN_TEST(test_A2B_StateMachineTransition_fires_callback);
+    RUN_TEST(test_A2B_StateMachineTransition_invalid_returns_error);
+    RUN_TEST(test_A2B_StateMachineIsValidTransition);
+    RUN_TEST(test_A2B_StateMachineTransition_full_sequence);
 
     return UNITY_END();
 }
