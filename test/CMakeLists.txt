@@ -27,6 +27,7 @@ set(TEST_SOURCES
     src/test_a2b_slot.c
     src/test_a2b_clock.c
     src/test_a2b_diagnostic.c
+    src/test_a2b_recovery.c
 )
 
 add_executable(${PROJECT_NAME}_tests ${TEST_SOURCES})

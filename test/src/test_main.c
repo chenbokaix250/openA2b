@@ -13,6 +13,7 @@
 #include "a2b_slot.h"
 #include "a2b_clock.h"
 #include "a2b_diagnostic.h"
+#include "a2b_recovery.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
@@ -25,6 +26,17 @@ extern void A2B_DiscoveryTestDeinit(void);
 extern void A2B_DiagTestInit(void);
 extern void A2B_DiagTestDeinit(void);
 
+/* Recovery */
+extern void test_A2B_RecoveryMgrInit(void);
+extern void test_A2B_RecoveryMgrRecover_NODE_RESET(void);
+extern void test_A2B_RecoveryMgrRecover_LINK_RENEGOTIATE(void);
+extern void test_A2B_RecoveryMgrRecover_FULL_DISCOVERY(void);
+extern void test_A2B_RecoveryMgrAbort(void);
+
+/* Recovery test initialization/cleanup */
+extern void A2B_RecoveryTestInit(void);
+extern void A2B_RecoveryTestDeinit(void);
+
 void setUp(void)
 {
     MockI2C_Init();
@@ -32,10 +44,12 @@ void setUp(void)
     AD2428_RegTestReset();
     A2B_DiscoveryTestInit();
     A2B_DiagTestInit();
+    A2B_RecoveryTestInit();
 }
 
 void tearDown(void)
 {
+    A2B_RecoveryTestDeinit();
     A2B_DiagTestDeinit();
     A2B_DiscoveryTestDeinit();
     MockI2C_Reset();
@@ -291,6 +305,13 @@ int main(void)
     RUN_TEST(test_A2B_DiagMgrGetLatestRecord);
     RUN_TEST(test_A2B_DiagMgrClearRecords);
     RUN_TEST(test_A2B_DiagMgrLogEvent_wraps_around);
+
+    /* Recovery */
+    RUN_TEST(test_A2B_RecoveryMgrInit);
+    RUN_TEST(test_A2B_RecoveryMgrRecover_NODE_RESET);
+    RUN_TEST(test_A2B_RecoveryMgrRecover_LINK_RENEGOTIATE);
+    RUN_TEST(test_A2B_RecoveryMgrRecover_FULL_DISCOVERY);
+    RUN_TEST(test_A2B_RecoveryMgrAbort);
 
     return UNITY_END();
 }

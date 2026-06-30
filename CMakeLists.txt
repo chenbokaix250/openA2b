@@ -27,6 +27,7 @@ add_library(${PROJECT_NAME}_hal STATIC
     core/a2b_slot.c
     core/a2b_clock.c
     core/a2b_diagnostic.c
+    core/a2b_recovery.c
 )
 target_include_directories(${PROJECT_NAME}_hal PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
