@@ -1,11 +1,16 @@
 #include "unity.h"
 #include "mock_i2c.h"
 #include "a2b_logger.h"
+#include "ad2428_reg.h"
+
+/* Register test reset function */
+extern void AD2428_RegTestReset(void);
 
 void setUp(void)
 {
     MockI2C_Init();
     A2B_LoggerInit();
+    AD2428_RegTestReset();
 }
 
 void tearDown(void)
@@ -40,6 +45,10 @@ extern void test_A2B_LoggerSetLevel_and_GetLevel(void);
 extern void test_A2B_LOG_ERROR_macro_compiles(void);
 extern void test_A2B_LOG_INFO_macro_compiles(void);
 extern void test_A2B_LOG_LEVEL_none_disables_logging(void);
+extern void test_AD2428_RegInit_sets_context(void);
+extern void test_AD2428_RegRead_calls_read_fn(void);
+extern void test_AD2428_RegWrite_calls_write_fn(void);
+extern void test_AD2428_RegUpdateBits_reads_modifies_writes(void);
 
 int main(void)
 {
@@ -83,6 +92,12 @@ int main(void)
     RUN_TEST(test_A2B_LOG_ERROR_macro_compiles);
     RUN_TEST(test_A2B_LOG_INFO_macro_compiles);
     RUN_TEST(test_A2B_LOG_LEVEL_none_disables_logging);
+
+    /* Register */
+    RUN_TEST(test_AD2428_RegInit_sets_context);
+    RUN_TEST(test_AD2428_RegRead_calls_read_fn);
+    RUN_TEST(test_AD2428_RegWrite_calls_write_fn);
+    RUN_TEST(test_AD2428_RegUpdateBits_reads_modifies_writes);
 
     return UNITY_END();
 }

@@ -24,6 +24,16 @@ target_include_directories(${PROJECT_NAME}_hal PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/core
 )
 
+# Register library
+add_library(${PROJECT_NAME}_register STATIC
+    register/ad2428_reg.c
+)
+target_include_directories(${PROJECT_NAME}_register PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/register
+)
+target_link_libraries(${PROJECT_NAME}_register PUBLIC ${PROJECT_NAME}_hal)
+
 # Mock library (optional)
 if(A2B_BUILD_MOCK)
     add_library(${PROJECT_NAME}_mock STATIC
