@@ -1,9 +1,6 @@
 #include "unity.h"
 #include "a2b_error.h"
 
-void setUp(void) {}
-void tearDown(void) {}
-
 void test_A2B_SUCCESS_is_zero(void)
 {
     TEST_ASSERT_EQUAL_INT32(0, A2B_SUCCESS);

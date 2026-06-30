@@ -1,9 +1,6 @@
 #include "unity.h"
 #include "a2b_types.h"
 
-void setUp(void) {}
-void tearDown(void) {}
-
 void test_A2B_MAX_NODES_is_16(void)
 {
     TEST_ASSERT_EQUAL_UINT8(16, A2B_MAX_NODES);

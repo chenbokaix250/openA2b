@@ -1,9 +1,11 @@
 #include "unity.h"
 #include "mock_i2c.h"
+#include "a2b_logger.h"
 
 void setUp(void)
 {
     MockI2C_Init();
+    A2B_LoggerInit();
 }
 
 void tearDown(void)
@@ -33,6 +35,11 @@ extern void test_A2B_TimerInit_returns_non_null(void);
 extern void test_A2B_TimerDeinit_returns_success(void);
 extern void test_A2B_TimerStop_returns_success(void);
 extern void test_A2B_TimerIsRunning_returns_false_after_init(void);
+extern void test_A2B_LoggerInit_succeeds(void);
+extern void test_A2B_LoggerSetLevel_and_GetLevel(void);
+extern void test_A2B_LOG_ERROR_macro_compiles(void);
+extern void test_A2B_LOG_INFO_macro_compiles(void);
+extern void test_A2B_LOG_LEVEL_none_disables_logging(void);
 
 int main(void)
 {
@@ -69,6 +76,13 @@ int main(void)
     RUN_TEST(test_A2B_TimerDeinit_returns_success);
     RUN_TEST(test_A2B_TimerStop_returns_success);
     RUN_TEST(test_A2B_TimerIsRunning_returns_false_after_init);
+
+    /* Logger */
+    RUN_TEST(test_A2B_LoggerInit_succeeds);
+    RUN_TEST(test_A2B_LoggerSetLevel_and_GetLevel);
+    RUN_TEST(test_A2B_LOG_ERROR_macro_compiles);
+    RUN_TEST(test_A2B_LOG_INFO_macro_compiles);
+    RUN_TEST(test_A2B_LOG_LEVEL_none_disables_logging);
 
     return UNITY_END();
 }

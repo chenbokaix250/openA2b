@@ -15,10 +15,13 @@ add_library(${PROJECT_NAME}_core INTERFACE)
 add_library(${PROJECT_NAME}_hal STATIC
     hal/a2b_i2c.c
     hal/a2b_timer.c
+    core/a2b_error.c
+    core/a2b_logger.c
 )
 target_include_directories(${PROJECT_NAME}_hal PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/hal
+    ${CMAKE_CURRENT_SOURCE_DIR}/core
 )
 
 # Mock library (optional)
@@ -28,6 +31,7 @@ if(A2B_BUILD_MOCK)
     )
     target_include_directories(${PROJECT_NAME}_mock PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/hal
         ${CMAKE_CURRENT_SOURCE_DIR}/mock
     )
     target_link_libraries(${PROJECT_NAME}_hal PUBLIC ${PROJECT_NAME}_mock)
