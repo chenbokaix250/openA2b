@@ -2,6 +2,7 @@
 #include "mock_i2c.h"
 #include "a2b_logger.h"
 #include "ad2428_reg.h"
+#include "a2b_device.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
@@ -49,6 +50,13 @@ extern void test_AD2428_RegInit_sets_context(void);
 extern void test_AD2428_RegRead_calls_read_fn(void);
 extern void test_AD2428_RegWrite_calls_write_fn(void);
 extern void test_AD2428_RegUpdateBits_reads_modifies_writes(void);
+extern void test_A2B_DeviceInit_with_valid_config(void);
+extern void test_A2B_DeviceInit_with_null_device(void);
+extern void test_A2B_DeviceInit_with_null_config(void);
+extern void test_A2B_DeviceDeinit(void);
+extern void test_A2B_DeviceGetState(void);
+extern void test_A2B_DeviceSetState(void);
+extern void test_A2B_DeviceInit_sets_max_nodes_limit(void);
 
 int main(void)
 {
@@ -98,6 +106,15 @@ int main(void)
     RUN_TEST(test_AD2428_RegRead_calls_read_fn);
     RUN_TEST(test_AD2428_RegWrite_calls_write_fn);
     RUN_TEST(test_AD2428_RegUpdateBits_reads_modifies_writes);
+
+    /* Device */
+    RUN_TEST(test_A2B_DeviceInit_with_valid_config);
+    RUN_TEST(test_A2B_DeviceInit_with_null_device);
+    RUN_TEST(test_A2B_DeviceInit_with_null_config);
+    RUN_TEST(test_A2B_DeviceDeinit);
+    RUN_TEST(test_A2B_DeviceGetState);
+    RUN_TEST(test_A2B_DeviceSetState);
+    RUN_TEST(test_A2B_DeviceInit_sets_max_nodes_limit);
 
     return UNITY_END();
 }

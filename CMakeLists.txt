@@ -17,6 +17,7 @@ add_library(${PROJECT_NAME}_hal STATIC
     hal/a2b_timer.c
     core/a2b_error.c
     core/a2b_logger.c
+    core/a2b_device.c
 )
 target_include_directories(${PROJECT_NAME}_hal PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
