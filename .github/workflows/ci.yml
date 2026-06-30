@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Unity
+        run: |
+          git clone --depth 1 https://github.com/ThrowTheSwitch/Unity.git unity_temp
+          mv unity_temp/unity ${PWD}/test/unity/
+          rm -rf unity_temp
+
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Run Tests
+        run: ctest --test-dir build -V
+
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v4
+        if: success()

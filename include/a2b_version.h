@@ -1,0 +1,10 @@
+#ifndef A2B_VERSION_H
+#define A2B_VERSION_H
+
+#define A2B_VERSION_MAJOR 1
+#define A2B_VERSION_MINOR 0
+#define A2B_VERSION_PATCH 0
+
+#define A2B_VERSION_STRING "1.0.0"
+
+#endif /* A2B_VERSION_H */
