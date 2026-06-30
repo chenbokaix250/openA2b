@@ -25,6 +25,7 @@ add_library(${PROJECT_NAME}_hal STATIC
     core/a2b_remote.c
     core/a2b_audio.c
     core/a2b_slot.c
+    core/a2b_clock.c
 )
 target_include_directories(${PROJECT_NAME}_hal PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include

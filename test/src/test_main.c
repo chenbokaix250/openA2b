@@ -11,6 +11,7 @@
 #include "a2b_remote.h"
 #include "a2b_audio.h"
 #include "a2b_slot.h"
+#include "a2b_clock.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
@@ -131,6 +132,13 @@ extern void test_A2B_SlotMgrInit(void);
 extern void test_A2B_SlotMgrSetSlot(void);
 extern void test_A2B_SlotMgrGetSlot(void);
 extern void test_A2B_SlotMgrSetSlot_out_of_range(void);
+
+/* Clock */
+extern void test_A2B_ClockMgrInit(void);
+extern void test_A2B_ClockMgrConfigure(void);
+extern void test_A2B_ClockMgrStartPLL(void);
+extern void test_A2B_ClockMgrWaitLock(void);
+extern void test_A2B_ClockMgrGetPLLStatus(void);
 
 int main(void)
 {
@@ -255,6 +263,13 @@ int main(void)
     RUN_TEST(test_A2B_SlotMgrSetSlot);
     RUN_TEST(test_A2B_SlotMgrGetSlot);
     RUN_TEST(test_A2B_SlotMgrSetSlot_out_of_range);
+
+    /* Clock */
+    RUN_TEST(test_A2B_ClockMgrInit);
+    RUN_TEST(test_A2B_ClockMgrConfigure);
+    RUN_TEST(test_A2B_ClockMgrStartPLL);
+    RUN_TEST(test_A2B_ClockMgrWaitLock);
+    RUN_TEST(test_A2B_ClockMgrGetPLLStatus);
 
     return UNITY_END();
 }
