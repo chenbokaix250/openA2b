@@ -12,6 +12,7 @@
 #include "a2b_audio.h"
 #include "a2b_slot.h"
 #include "a2b_clock.h"
+#include "a2b_diagnostic.h"
 
 /* Register test reset function */
 extern void AD2428_RegTestReset(void);
@@ -20,16 +21,22 @@ extern void AD2428_RegTestReset(void);
 extern void A2B_DiscoveryTestInit(void);
 extern void A2B_DiscoveryTestDeinit(void);
 
+/* Diagnostic test initialization/cleanup */
+extern void A2B_DiagTestInit(void);
+extern void A2B_DiagTestDeinit(void);
+
 void setUp(void)
 {
     MockI2C_Init();
     A2B_LoggerInit();
     AD2428_RegTestReset();
     A2B_DiscoveryTestInit();
+    A2B_DiagTestInit();
 }
 
 void tearDown(void)
 {
+    A2B_DiagTestDeinit();
     A2B_DiscoveryTestDeinit();
     MockI2C_Reset();
 }
@@ -139,6 +146,13 @@ extern void test_A2B_ClockMgrConfigure(void);
 extern void test_A2B_ClockMgrStartPLL(void);
 extern void test_A2B_ClockMgrWaitLock(void);
 extern void test_A2B_ClockMgrGetPLLStatus(void);
+
+/* Diagnostic */
+extern void test_A2B_DiagMgrInit(void);
+extern void test_A2B_DiagMgrLogEvent(void);
+extern void test_A2B_DiagMgrGetLatestRecord(void);
+extern void test_A2B_DiagMgrClearRecords(void);
+extern void test_A2B_DiagMgrLogEvent_wraps_around(void);
 
 int main(void)
 {
@@ -270,6 +284,13 @@ int main(void)
     RUN_TEST(test_A2B_ClockMgrStartPLL);
     RUN_TEST(test_A2B_ClockMgrWaitLock);
     RUN_TEST(test_A2B_ClockMgrGetPLLStatus);
+
+    /* Diagnostic */
+    RUN_TEST(test_A2B_DiagMgrInit);
+    RUN_TEST(test_A2B_DiagMgrLogEvent);
+    RUN_TEST(test_A2B_DiagMgrGetLatestRecord);
+    RUN_TEST(test_A2B_DiagMgrClearRecords);
+    RUN_TEST(test_A2B_DiagMgrLogEvent_wraps_around);
 
     return UNITY_END();
 }
