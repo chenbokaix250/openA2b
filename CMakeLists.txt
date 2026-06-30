@@ -45,6 +45,7 @@ target_link_libraries(${PROJECT_NAME}_register PUBLIC ${PROJECT_NAME}_hal)
 if(A2B_BUILD_MOCK)
     add_library(${PROJECT_NAME}_mock STATIC
         mock/mock_i2c.c
+        mock/mock_ad2428.c
     )
     target_include_directories(${PROJECT_NAME}_mock PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include

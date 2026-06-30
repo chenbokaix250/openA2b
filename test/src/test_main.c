@@ -1,5 +1,6 @@
 #include "unity.h"
 #include "mock_i2c.h"
+#include "mock_ad2428.h"
 #include "a2b_logger.h"
 #include "ad2428_reg.h"
 #include "a2b_device.h"
@@ -108,6 +109,14 @@ extern void test_A2B_RemoteRegRead_returns_unsupported(void);
 extern void test_A2B_RemoteRegWrite_returns_unsupported(void);
 extern void test_A2B_RemoteRegUpdateBits_returns_unsupported(void);
 
+/* Mock AD2428 */
+extern void test_MockAD2428_Init(void);
+extern void test_MockAD2428_Reset_sets_defaults(void);
+extern void test_MockAD2428_SetReg_and_GetReg(void);
+extern void test_MockAD2428_I2CWrite(void);
+extern void test_MockAD2428_I2CRead(void);
+extern void test_MockAD2428_InjectNack(void);
+
 int main(void)
 {
     UNITY_BEGIN();
@@ -210,6 +219,14 @@ int main(void)
     RUN_TEST(test_A2B_RemoteRegRead_returns_unsupported);
     RUN_TEST(test_A2B_RemoteRegWrite_returns_unsupported);
     RUN_TEST(test_A2B_RemoteRegUpdateBits_returns_unsupported);
+
+    /* Mock AD2428 */
+    RUN_TEST(test_MockAD2428_Init);
+    RUN_TEST(test_MockAD2428_Reset_sets_defaults);
+    RUN_TEST(test_MockAD2428_SetReg_and_GetReg);
+    RUN_TEST(test_MockAD2428_I2CWrite);
+    RUN_TEST(test_MockAD2428_I2CRead);
+    RUN_TEST(test_MockAD2428_InjectNack);
 
     return UNITY_END();
 }
