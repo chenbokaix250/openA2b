@@ -1,0 +1,1 @@
+/usr/bin/cc  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/a2b_demo.dir/demo_main.c.o -o a2b_demo  ../libOpenA2B_hal.a ../libOpenA2B_register.a ../libOpenA2B_mock.a ../libOpenA2B_hal.a ../libOpenA2B_mock.a
