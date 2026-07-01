@@ -72,3 +72,17 @@ install(TARGETS ${PROJECT_NAME}_hal
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
+
+# Documentation (Doxygen)
+option(BUILD_DOCS "Build Doxygen documentation" OFF)
+
+if(BUILD_DOCS)
+    find_package(Doxygen REQUIRED)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in
+                   ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+    add_custom_target(docs
+        ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        COMMENT "Generating API documentation" VERBATIM
+    )
+endif()
