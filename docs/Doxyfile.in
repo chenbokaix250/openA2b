@@ -1,0 +1,56 @@
+# Doxyfile for OpenA2B
+
+PROJECT_NAME           = "OpenA2B"
+PROJECT_NUMBER         = 1.0.0
+PROJECT_BRIEF          = "Open Automotive Audio Bus Driver Framework"
+OUTPUT_DIRECTORY       = doxygen
+CREATE_SUBDIRS         = NO
+
+# C language
+OPTIMIZE_OUTPUT_FOR_C  = YES
+EXTENSION_MAPPING      = h=C
+
+# Source browsing
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+
+# HTML output
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_COLORSTYLE_HUE    = 200
+HTML_COLORSTYLE_SAT    = 100
+HTML_TIMESTAMP         = YES
+
+# LaTeX (optional)
+GENERATE_LATEX         = NO
+
+# XML output (for future use)
+GENERATE_XML           = YES
+XML_OUTPUT             = xml
+
+# Configuration file
+GENERATE_TAGFILE       = docs/open-a2b.tag
+
+# Include all headers
+INPUT                  = include \
+                         core \
+                         hal \
+                         register \
+                         mock
+
+# Exclude test files from docs
+EXCLUDE                = test
+
+# File patterns
+FILE_PATTERNS          = *.h \
+                         *.c
+
+# Recursive scan
+RECURSIVE              = YES
+
+# Quiet mode
+QUIET                  = YES
+
+# Warnings
+WARN_IF_UNDOCUMENTED   = YES
+WARN_NO_PARAMDOC       = YES
