@@ -1,0 +1,28 @@
+@startuml
+title A2B Audio Routing
+
+package "Master Node" {
+    [Audio Source] --> Upstream1 : TDM slots 0-3
+    [Audio Sink] <-- Downstream1 : TDM slots 4-7
+}
+
+package "Slave Node 1" {
+    Upstream1 --> [Codec In]
+    [Codec Out] --> Downstream1
+}
+
+package "Slave Node 2" {
+    Upstream2 --> [Tweeter Amp]
+    [Mic Array] --> Downstream2
+}
+
+Master Node ..> Upstream2 : audio route
+Master Node ..> Downstream2 : audio route
+
+legend right
+  = Legend
+  * Upstream: Slave → Master (microphones)
+  * Downstream: Master → Slave (speakers)
+endlegend
+
+@enduml

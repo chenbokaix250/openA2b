@@ -1,0 +1,34 @@
+@startuml
+title A2B State Machine
+
+[*] --> INIT
+
+INIT --> IDLE : A2B_DeviceInit()
+
+IDLE --> WAIT_POWER : A2B_DiscoveryStart()
+
+WAIT_POWER --> WAIT_PLL : Power stable
+WAIT_PLL --> DISCOVERY : PLL locked
+
+DISCOVERY --> CONFIG_NODE : Node found
+CONFIG_NODE --> CONFIG_SLOT : Node configured
+CONFIG_SLOT --> CONFIG_ROUTE : Slots configured
+CONFIG_ROUTE --> RUNNING : Routes set
+
+RUNNING --> LINK_DOWN : Link error
+LINK_DOWN --> RECOVERY : Error detected
+RECOVERY --> RUNNING : Recovery success
+RECOVERY --> DISCOVERY : Full rediscovery
+
+RUNNING --> SHUTDOWN : A2B_Shutdown()
+SHUTDOWN --> [*]
+
+RECOVERY --> ERROR : Recovery failed
+ERROR --> [*]
+
+note right of RUNNING
+    Normal operation state
+    Audio streaming active
+end note
+
+@enduml

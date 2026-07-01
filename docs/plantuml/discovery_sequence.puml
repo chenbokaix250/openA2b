@@ -1,0 +1,41 @@
+@startuml
+title A2B Discovery Sequence
+
+actor App
+participant "DiscoveryMgr" as Disc
+participant "NetworkMgr" as Net
+participant "I2C" as I2C
+participant "AD2428" as Chip
+
+App -> Disc: A2B_DiscoveryStart()
+activate Disc
+
+Disc -> Chip: Write REG_RESET
+Disc -> Chip: Read REG_PLL_STATUS
+note right: Wait for PLL lock
+
+loop for each node (1..N)
+    Disc -> Chip: Write DISCOVERY_CMD(node_id)
+    Chip -> Chip: Process discovery
+
+    alt Node responds
+        Chip --> Disc: REG_VENDOR_ID
+        Chip --> Disc: REG_PRODUCT_ID
+        Chip --> Disc: REG_CAPABILITIES
+
+        Disc -> Net: A2B_NetworkMgrAddNode()
+        activate Net
+        Net --> Disc: node_info
+        deactivate Net
+
+        Disc -> Chip: Write REG_NODE_CONFIG
+    else No response
+        Chip --> Disc: NACK/timeout
+        Disc -> App: A2B_ERR_NODE_NOT_FOUND
+    end
+end
+
+Disc -> App: A2B_SUCCESS
+deactivate Disc
+
+@enduml
